@@ -14,7 +14,7 @@ const Dashboard = ({ userInfo }) => {
     try {
       const token = localStorage.getItem("accessToken");
       // const response = await fetch("http://localhost:8000/categories", { TO RUN THE PROJECT LOCALLY 
-      const response = await fetch("https://dashboard-backend-hmq1.onrender.com/", {
+      const response = await fetch("https://dashboard-backend-hmq1.onrender.com/categories", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
