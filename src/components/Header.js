@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import {
-  FaSearch,
   FaBell,
   FaClipboardList,
   FaBox,
@@ -18,6 +17,7 @@ import "../styles/Header.css";
 import { toast } from "react-toastify";
 import axiosapp from "../utils/axiosapp";
 import Profile from "./Profile";
+import SearchBar from "./SearchBar";
 
 const iconMap = {
   MdDashboard,
@@ -46,11 +46,10 @@ const sidebarData = [
   { label: "Logout", icon: "FaSignOutAlt" },
 ];
 
-const Header = () => {
+const Header = ({ searchQuery, setSearchQuery }) => {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -69,13 +68,6 @@ const Header = () => {
     setIsSidebarVisible(!isSidebarVisible);
   };
 
-  const SearchBar = () => (
-    <div className="search-container">
-      <FaSearch className="search-icon" />
-      <input type="search" placeholder="Search..." className="search-input" />
-    </div>
-  );
-
   const handleLogout = () => {
     localStorage.clear();
     toast.success("Logout Successful!");
@@ -92,8 +84,6 @@ const Header = () => {
       if (error.response && error.response.status === 401) {
         localStorage.clear();
         navigate("/login");
-      } else {
-        console.log("Error occurred:", error.message);
       }
     }
   }, [navigate]);
@@ -118,7 +108,10 @@ const Header = () => {
 
           {!isMobileView && (
             <div className="header-center">
-              <SearchBar />
+              <SearchBar
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+              />
             </div>
           )}
 
@@ -132,7 +125,10 @@ const Header = () => {
 
       {isMobileView && (
         <div className="mobile-search-wrapper">
-          <SearchBar />
+          <SearchBar
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
         </div>
       )}
 

@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import Password from "./Password";
 import { validateEmail } from "../utils/helper";
 import axiosapp from "../utils/axiosapp";
-import "../styles/Login.css"
+import "../styles/Login.css";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
